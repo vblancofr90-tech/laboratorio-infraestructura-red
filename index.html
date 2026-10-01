@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Víctor Blanco Fragueiro — Laboratorio de infraestructura de red</title>
+<style>
+  :root{
+    --blue:#1a5276; --blue-dark:#123a54; --blue-light:#eaf1f6;
+    --dark:#1c1f22; --grey:#5c6066; --grey-light:#8d9299;
+    --bg:#f6f8fa; --card:#ffffff; --border:#e3e7eb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--dark); line-height:1.6;}
+  a{color:var(--blue); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+
+  header.top{position:sticky; top:0; background:rgba(255,255,255,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); z-index:10;}
+  header.top .wrap{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  header.top .brand{font-weight:700; color:var(--blue);}
+  header.top nav a{margin-left:22px; font-size:14px; color:var(--dark); font-weight:500;}
+  header.top nav a:hover{color:var(--blue);}
+
+  .hero{padding:72px 0 56px; text-align:center;}
+  .hero .eyebrow{font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:14px;}
+  .hero h1{font-size:36px; line-height:1.25; color:var(--dark); margin-bottom:18px; font-weight:800;}
+  .hero p.lead{font-size:17px; color:var(--grey); max-width:640px; margin:0 auto 30px;}
+  .btn-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:8px; font-weight:600; font-size:14px;}
+  .btn-primary{background:var(--blue); color:#fff;}
+  .btn-primary:hover{background:var(--blue-dark); text-decoration:none;}
+  .btn-secondary{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .btn-secondary:hover{background:var(--blue-light); text-decoration:none;}
+
+  section{padding:48px 0;}
+  section h2{font-size:24px; color:var(--dark); margin-bottom:8px; font-weight:800;}
+  section p.sec-sub{color:var(--grey); margin-bottom:28px; font-size:15px;}
+
+  .stack-grid{display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{background:var(--blue-light); color:var(--blue-dark); padding:7px 14px; border-radius:20px; font-size:13px; font-weight:600;}
+
+  .diagram-card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center;}
+  .diagram-card img{max-width:100%; border-radius:6px;}
+
+  .vm-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:24px;}
+  .vm-card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; font-size:13px;}
+  .vm-card .name{font-weight:700; color:var(--blue); display:block; margin-bottom:4px;}
+
+  .phase{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:20px; align-items:center;}
+  .phase img{width:100%; border-radius:8px; border:1px solid var(--border); display:block;}
+  .phase .num{display:inline-block; background:var(--blue); color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:8px;}
+  .phase h3{font-size:17px; margin-bottom:8px; color:var(--dark); font-weight:700;}
+  .phase p{font-size:14px; color:var(--grey); margin:0;}
+  .phase .flag{display:inline-block; margin-top:10px; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px;}
+  .flag-ok{background:#e4f3e9; color:#1e7a44;}
+  .flag-warn{background:#fcefe0; color:#a05a15;}
+
+  @media (max-width:640px){
+    .phase{grid-template-columns:1fr;}
+    .hero h1{font-size:28px;}
+  }
+
+  footer{padding:40px 0 60px; text-align:center; color:var(--grey-light); font-size:13px; border-top:1px solid var(--border); margin-top:20px;}
+  footer a{color:var(--blue);}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Víctor Blanco Fragueiro</span>
+    <nav>
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#fases">Fases</a>
+      <a href="#stack">Stack</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Proyecto de laboratorio — infraestructura de sistemas</div>
+    <h1>Despliegue de una infraestructura de red empresarial<br>con Windows Server, Linux, virtualización y monitorización</h1>
+    <p class="lead">Dominio Active Directory multi-DC, integración de clientes Windows y Linux, almacenamiento redundante, logs centralizados, contenedores, monitorización, backups y automatización — todo montado y documentado de principio a fin.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="Memoria_Proyecto_Infraestructura.pdf">Ver memoria completa (PDF, 57 páginas)</a>
+      <a class="btn btn-secondary" href="https://github.com/vblancofr90-tech/laboratorio-infraestructura-red">Ver repositorio en GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="arquitectura">
+  <div class="wrap">
+    <h2>Arquitectura del laboratorio</h2>
+    <p class="sec-sub">Siete máquinas virtuales sobre VMware Workstation, en red interna 192.168.100.0/24.</p>
+    <div class="diagram-card">
+      <img src="Diagrama_topologia_red.png" alt="Diagrama de topología de red del laboratorio">
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card"><span class="name">DC01</span>Controlador de dominio principal — AD DS, DNS, DHCP</div>
+      <div class="vm-card"><span class="name">SRV02</span>Segundo controlador de dominio</div>
+      <div class="vm-card"><span class="name">NAS01</span>Almacenamiento RAID 5 — OpenMediaVault</div>
+      <div class="vm-card"><span class="name">SRV-LNX</span>Logs, Docker, Portainer, monitorización</div>
+      <div class="vm-card"><span class="name">WK10 / WK11</span>Clientes Windows en el dominio</div>
+      <div class="vm-card"><span class="name">LNX01</span>Cliente Linux en el dominio</div>
+    </div>
+  </div>
+</section>
+
+<section id="fases">
+  <div class="wrap">
+    <h2>Desarrollo por fases</h2>
+    <p class="sec-sub">Cada fase incluye su propio desarrollo técnico, comandos utilizados y capturas de verificación en la memoria completa.</p>
+
+    <div class="phase">
+      <img src="Fase1_roles-instalados-dc01.png" alt="Fase 1">
+      <div><span class="num">Fase 1</span><h3>Controlador de dominio, DNS y DHCP</h3><p>Instalación de Windows Server 2022 y despliegue de AD DS, DNS y DHCP sobre DC01.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase2_sitios-servicios-dos-DC.png" alt="Fase 2">
+      <div><span class="num">Fase 2</span><h3>Segundo controlador de dominio</h3><p>Redundancia del directorio activo con SRV02 y verificación de la replicación multimaestro.</p><span class="flag flag-warn">Replicación en diagnóstico</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase3_usuarios-en-UO-ventas.png" alt="Fase 3">
+      <div><span class="num">Fase 3</span><h3>Unidades organizativas, usuarios y grupos</h3><p>Estructura de UO por departamento, usuarios y grupos de seguridad (modelo AGDLP).</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase4_backup-gpo-powershell.png" alt="Fase 4">
+      <div><span class="num">Fase 4</span><h3>Directivas de grupo (GPO)</h3><p>Creación, vinculación y copia de seguridad de GPO mediante PowerShell.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase5_wk10-escritorio.png" alt="Fase 5">
+      <div><span class="num">Fase 5</span><h3>Clientes Windows en el dominio</h3><p>Incorporación de WK10 y WK11, con prueba de control de acceso positiva y negativa.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase6_login-grafico-dominio.png" alt="Fase 6">
+      <div><span class="num">Fase 6</span><h3>Cliente Linux en el dominio</h3><p>Integración de Ubuntu mediante realmd, sssd y Kerberos.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase7_acceso-samba-lnx01-desde-wk11.png" alt="Fase 7">
+      <div><span class="num">Fase 7</span><h3>Recursos compartidos SMB y NFS</h3><p>Interoperabilidad Windows/Linux, con diagnóstico y corrección de permisos NFS.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase8_raid-recuperado.png" alt="Fase 8">
+      <div><span class="num">Fase 8</span><h3>NAS con RAID 5</h3><p>OpenMediaVault con tolerancia a fallos, resolviendo dos incidencias reales durante el proceso.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase9_grafana-logs-centralizados.png" alt="Fase 9">
+      <div><span class="num">Fase 9</span><h3>Logs centralizados y Grafana</h3><p>rsyslog + Loki + Promtail, con consulta visual mediante LogQL.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase10_grafana-metricas.png" alt="Fase 10">
+      <div><span class="num">Fase 10</span><h3>Docker, Portainer y monitorización</h3><p>Prometheus, node-exporter, cAdvisor y windows_exporter visualizados en Grafana.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase11_restauracion-verificada.png" alt="Fase 11">
+      <div><span class="num">Fase 11</span><h3>Backups y restauración</h3><p>rsync y robocopy con prueba de restauración real, más diagnóstico de una limitación de wbadmin.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+    <div class="phase">
+      <img src="Fase12_powershell-ejecutado.png" alt="Fase 12">
+      <div><span class="num">Fase 12</span><h3>Automatización con scripts</h3><p>Scripts en PowerShell y Bash, con detección de errores probada deliberadamente.</p><span class="flag flag-ok">Completado</span></div>
+    </div>
+
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <h2>Stack técnico</h2>
+    <p class="sec-sub">Tecnologías utilizadas a lo largo de todo el proyecto.</p>
+    <div class="stack-grid">
+      <span class="pill">Windows Server 2022</span>
+      <span class="pill">Active Directory</span>
+      <span class="pill">DNS / DHCP</span>
+      <span class="pill">GPO</span>
+      <span class="pill">Ubuntu Server / Desktop</span>
+      <span class="pill">realmd / sssd</span>
+      <span class="pill">Samba (SMB)</span>
+      <span class="pill">NFS</span>
+      <span class="pill">OpenMediaVault</span>
+      <span class="pill">RAID 5 (mdadm)</span>
+      <span class="pill">Docker</span>
+      <span class="pill">Portainer</span>
+      <span class="pill">Prometheus</span>
+      <span class="pill">Grafana</span>
+      <span class="pill">Loki</span>
+      <span class="pill">rsyslog</span>
+      <span class="pill">PowerShell</span>
+      <span class="pill">Bash</span>
+      <span class="pill">VMware Workstation</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR) ·
+    <a href="https://github.com/vblancofr90-tech/laboratorio-infraestructura-red">Repositorio del proyecto en GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
