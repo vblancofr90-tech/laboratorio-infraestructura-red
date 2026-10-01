@@ -6,63 +6,81 @@
 <title>Víctor Blanco Fragueiro — Laboratorio de infraestructura de red</title>
 <style>
   :root{
-    --blue:#1a5276; --blue-dark:#123a54; --blue-light:#eaf1f6;
-    --dark:#1c1f22; --grey:#5c6066; --grey-light:#8d9299;
-    --bg:#f6f8fa; --card:#ffffff; --border:#e3e7eb;
+    --cyan:#4fd1ff; --cyan-dim:#2a90b8; --blue:#3b82f6;
+    --bg:#070b12; --bg2:#0c131f; --card:#0f1826; --border:#1c2a3d;
+    --text:#e8edf4; --text2:#9fb0c3; --text3:#6b7a8f;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--dark); line-height:1.6;}
-  a{color:var(--blue); text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden;}
+  a{color:var(--cyan); text-decoration:none;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 24px; position:relative; z-index:2;}
 
-  header.top{position:sticky; top:0; background:rgba(255,255,255,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); z-index:10;}
-  header.top .wrap{display:flex; align-items:center; justify-content:space-between; height:60px;}
-  header.top .brand{font-weight:700; color:var(--blue);}
-  header.top nav a{margin-left:22px; font-size:14px; color:var(--dark); font-weight:500;}
-  header.top nav a:hover{color:var(--blue);}
+  header.top{position:sticky; top:0; background:rgba(7,11,18,0.75); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); z-index:50;}
+  header.top .wrap{display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 24px;}
+  header.top .brand{font-weight:700; color:#fff; letter-spacing:.01em;}
+  header.top nav a{margin-left:26px; font-size:14px; color:var(--text2); font-weight:500; transition:color .2s;}
+  header.top nav a:hover{color:var(--cyan);}
 
-  .hero{padding:72px 0 56px; text-align:center;}
-  .hero .eyebrow{font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:14px;}
-  .hero h1{font-size:36px; line-height:1.25; color:var(--dark); margin-bottom:18px; font-weight:800;}
-  .hero p.lead{font-size:17px; color:var(--grey); max-width:640px; margin:0 auto 30px;}
+  .hero{position:relative; min-height:640px; display:flex; align-items:center; padding:60px 0; overflow:hidden;}
+  #hero-canvas{position:absolute; inset:0; z-index:1; opacity:0.85;}
+  .hero-content{position:relative; z-index:2; text-align:center; width:100%;}
+  .hero .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--cyan); font-weight:700; margin-bottom:18px;}
+  .hero h1{font-size:40px; line-height:1.22; margin-bottom:20px; font-weight:800; text-shadow:0 2px 40px rgba(79,209,255,.25);
+    background:linear-gradient(90deg,#ffffff 0%,#bfeeff 45%,#4fd1ff 75%,#ffffff 100%);
+    background-size:220% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    animation:shine 7s linear infinite;}
+  @keyframes shine{ to{ background-position:-220% center; } }
+  .hero p.lead{font-size:17px; color:var(--text2); max-width:640px; margin:0 auto 34px; text-shadow:0 2px 20px rgba(0,0,0,.6);}
   .btn-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:8px; font-weight:600; font-size:14px;}
-  .btn-primary{background:var(--blue); color:#fff;}
-  .btn-primary:hover{background:var(--blue-dark); text-decoration:none;}
-  .btn-secondary{background:#fff; color:var(--blue); border:1px solid var(--blue);}
-  .btn-secondary:hover{background:var(--blue-light); text-decoration:none;}
+  .stats-row{display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-top:48px;}
+  .stat{text-align:center;}
+  .stat .num{font-size:32px; font-weight:800; color:var(--cyan); text-shadow:0 0 24px rgba(79,209,255,.5);}
+  .stat .lbl{font-size:12px; color:var(--text3); text-transform:uppercase; letter-spacing:.08em; margin-top:4px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:8px; font-weight:600; font-size:14px; transition:all .2s; cursor:pointer;}
+  .btn-primary{background:var(--cyan); color:#04202e;}
+  .btn-primary:hover{background:#7fe0ff; transform:translateY(-2px); box-shadow:0 8px 24px rgba(79,209,255,.35);}
+  .btn-secondary{background:rgba(255,255,255,0.04); color:#fff; border:1px solid var(--border);}
+  .btn-secondary:hover{background:rgba(255,255,255,0.08); border-color:var(--cyan); transform:translateY(-2px);}
 
-  section{padding:48px 0;}
-  section h2{font-size:24px; color:var(--dark); margin-bottom:8px; font-weight:800;}
-  section p.sec-sub{color:var(--grey); margin-bottom:28px; font-size:15px;}
+  section{padding:64px 0; position:relative;}
+  section h2{font-size:26px; color:#fff; margin-bottom:10px; font-weight:800;}
+  section p.sec-sub{color:var(--text2); margin-bottom:32px; font-size:15px;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1; transform:translateY(0);}
 
   .stack-grid{display:flex; flex-wrap:wrap; gap:10px;}
-  .pill{background:var(--blue-light); color:var(--blue-dark); padding:7px 14px; border-radius:20px; font-size:13px; font-weight:600;}
+  .pill{background:var(--card); border:1px solid var(--border); color:var(--cyan); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; transition:all .2s;}
+  .pill:hover{border-color:var(--cyan); background:rgba(79,209,255,.08); transform:translateY(-2px);}
 
-  .diagram-card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center;}
-  .diagram-card img{max-width:100%; border-radius:6px;}
+  .diagram-card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; text-align:center;}
+  .diagram-card img{max-width:100%; border-radius:8px; filter:invert(1) hue-rotate(180deg) brightness(1.15); mix-blend-mode:screen;}
 
-  .vm-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:24px;}
-  .vm-card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; font-size:13px;}
-  .vm-card .name{font-weight:700; color:var(--blue); display:block; margin-bottom:4px;}
+  .vm-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:28px;}
+  .vm-card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; font-size:13px; color:var(--text2); transition:all .25s;}
+  .vm-card:hover{border-color:var(--cyan); transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .vm-card .name{font-weight:700; color:var(--cyan); display:block; margin-bottom:6px; font-size:14px;}
 
-  .phase{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:20px; align-items:center;}
-  .phase img{width:100%; border-radius:8px; border:1px solid var(--border); display:block;}
-  .phase .num{display:inline-block; background:var(--blue); color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:8px;}
-  .phase h3{font-size:17px; margin-bottom:8px; color:var(--dark); font-weight:700;}
-  .phase p{font-size:14px; color:var(--grey); margin:0;}
-  .phase .flag{display:inline-block; margin-top:10px; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px;}
-  .flag-ok{background:#e4f3e9; color:#1e7a44;}
-  .flag-warn{background:#fcefe0; color:#a05a15;}
+  .phase{display:grid; grid-template-columns:220px 1fr; gap:28px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; margin-bottom:20px; align-items:center; transition:transform .15s ease, box-shadow .3s, border-color .3s; transform-style:preserve-3d; will-change:transform;}
+  .phase:hover{border-color:var(--cyan); box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .phase .imgwrap{border-radius:10px; overflow:hidden; border:1px solid var(--border);}
+  .phase img{width:100%; display:block; transition:transform .4s;}
+  .phase:hover img{transform:scale(1.05);}
+  .phase .num{display:inline-block; background:rgba(79,209,255,.12); color:var(--cyan); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; margin-bottom:10px; letter-spacing:.04em;}
+  .phase h3{font-size:18px; margin-bottom:8px; color:#fff; font-weight:700;}
+  .phase p{font-size:14px; color:var(--text2); margin:0;}
+  .phase .flag{display:inline-block; margin-top:12px; font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px;}
+  .flag-ok{background:rgba(52,211,153,.12); color:#5eead4;}
+  .flag-warn{background:rgba(251,191,36,.12); color:#fcd34d;}
 
   @media (max-width:640px){
     .phase{grid-template-columns:1fr;}
     .hero h1{font-size:28px;}
   }
 
-  footer{padding:40px 0 60px; text-align:center; color:var(--grey-light); font-size:13px; border-top:1px solid var(--border); margin-top:20px;}
-  footer a{color:var(--blue);}
+  footer{padding:50px 0 70px; text-align:center; color:var(--text3); font-size:13px; border-top:1px solid var(--border); margin-top:20px;}
+  footer a{color:var(--cyan);}
 </style>
 </head>
 <body>
@@ -79,7 +97,8 @@
 </header>
 
 <section class="hero">
-  <div class="wrap">
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap hero-content">
     <div class="eyebrow">Proyecto de laboratorio — infraestructura de sistemas</div>
     <h1>Despliegue de una infraestructura de red empresarial<br>con Windows Server, Linux, virtualización y monitorización</h1>
     <p class="lead">Dominio Active Directory multi-DC, integración de clientes Windows y Linux, almacenamiento redundante, logs centralizados, contenedores, monitorización, backups y automatización — todo montado y documentado de principio a fin.</p>
@@ -87,13 +106,19 @@
       <a class="btn btn-primary" href="Memoria_Proyecto_Infraestructura.pdf">Ver memoria completa (PDF, 57 páginas)</a>
       <a class="btn btn-secondary" href="https://github.com/vblancofr90-tech/laboratorio-infraestructura-red">Ver repositorio en GitHub</a>
     </div>
+    <div class="stats-row">
+      <div class="stat"><div class="num" data-count="7">0</div><div class="lbl">Máquinas virtuales</div></div>
+      <div class="stat"><div class="num" data-count="12">0</div><div class="lbl">Fases desarrolladas</div></div>
+      <div class="stat"><div class="num" data-count="70">0</div><div class="lbl">Capturas reales</div></div>
+      <div class="stat"><div class="num" data-count="57">0</div><div class="lbl">Páginas de memoria</div></div>
+    </div>
   </div>
 </section>
 
 <section id="arquitectura">
-  <div class="wrap">
+  <div class="wrap reveal">
     <h2>Arquitectura del laboratorio</h2>
-    <p class="sec-sub">Siete máquinas virtuales sobre VMware Workstation, en red interna 192.168.100.0/24.</p>
+    <p class="sec-sub">Siete máquinas virtuales sobre VMware Workstation, en red interna 192.168.100.0/24. El diagrama 3D de arriba representa esta misma topología.</p>
     <div class="diagram-card">
       <img src="Diagrama_topologia_red.png" alt="Diagrama de topología de red del laboratorio">
     </div>
@@ -109,75 +134,39 @@
 </section>
 
 <section id="fases">
-  <div class="wrap">
+  <div class="wrap reveal">
     <h2>Desarrollo por fases</h2>
     <p class="sec-sub">Cada fase incluye su propio desarrollo técnico, comandos utilizados y capturas de verificación en la memoria completa.</p>
 
-    <div class="phase">
-      <img src="Fase1_roles-instalados-dc01.png" alt="Fase 1">
-      <div><span class="num">Fase 1</span><h3>Controlador de dominio, DNS y DHCP</h3><p>Instalación de Windows Server 2022 y despliegue de AD DS, DNS y DHCP sobre DC01.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase1_roles-instalados-dc01.png" alt="Fase 1"></div><div><span class="num">Fase 1</span><h3>Controlador de dominio, DNS y DHCP</h3><p>Instalación de Windows Server 2022 y despliegue de AD DS, DNS y DHCP sobre DC01.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase2_sitios-servicios-dos-DC.png" alt="Fase 2">
-      <div><span class="num">Fase 2</span><h3>Segundo controlador de dominio</h3><p>Redundancia del directorio activo con SRV02 y verificación de la replicación multimaestro.</p><span class="flag flag-warn">Replicación en diagnóstico</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase2_sitios-servicios-dos-DC.png" alt="Fase 2"></div><div><span class="num">Fase 2</span><h3>Segundo controlador de dominio</h3><p>Redundancia del directorio activo con SRV02 y verificación de la replicación multimaestro.</p><span class="flag flag-warn">Replicación en diagnóstico</span></div></div>
 
-    <div class="phase">
-      <img src="Fase3_usuarios-en-UO-ventas.png" alt="Fase 3">
-      <div><span class="num">Fase 3</span><h3>Unidades organizativas, usuarios y grupos</h3><p>Estructura de UO por departamento, usuarios y grupos de seguridad (modelo AGDLP).</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase3_usuarios-en-UO-ventas.png" alt="Fase 3"></div><div><span class="num">Fase 3</span><h3>Unidades organizativas, usuarios y grupos</h3><p>Estructura de UO por departamento, usuarios y grupos de seguridad (modelo AGDLP).</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase4_backup-gpo-powershell.png" alt="Fase 4">
-      <div><span class="num">Fase 4</span><h3>Directivas de grupo (GPO)</h3><p>Creación, vinculación y copia de seguridad de GPO mediante PowerShell.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase4_backup-gpo-powershell.png" alt="Fase 4"></div><div><span class="num">Fase 4</span><h3>Directivas de grupo (GPO)</h3><p>Creación, vinculación y copia de seguridad de GPO mediante PowerShell.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase5_wk10-escritorio.png" alt="Fase 5">
-      <div><span class="num">Fase 5</span><h3>Clientes Windows en el dominio</h3><p>Incorporación de WK10 y WK11, con prueba de control de acceso positiva y negativa.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase5_wk10-escritorio.png" alt="Fase 5"></div><div><span class="num">Fase 5</span><h3>Clientes Windows en el dominio</h3><p>Incorporación de WK10 y WK11, con prueba de control de acceso positiva y negativa.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase6_login-grafico-dominio.png" alt="Fase 6">
-      <div><span class="num">Fase 6</span><h3>Cliente Linux en el dominio</h3><p>Integración de Ubuntu mediante realmd, sssd y Kerberos.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase6_login-grafico-dominio.png" alt="Fase 6"></div><div><span class="num">Fase 6</span><h3>Cliente Linux en el dominio</h3><p>Integración de Ubuntu mediante realmd, sssd y Kerberos.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase7_acceso-samba-lnx01-desde-wk11.png" alt="Fase 7">
-      <div><span class="num">Fase 7</span><h3>Recursos compartidos SMB y NFS</h3><p>Interoperabilidad Windows/Linux, con diagnóstico y corrección de permisos NFS.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase7_acceso-samba-lnx01-desde-wk11.png" alt="Fase 7"></div><div><span class="num">Fase 7</span><h3>Recursos compartidos SMB y NFS</h3><p>Interoperabilidad Windows/Linux, con diagnóstico y corrección de permisos NFS.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase8_raid-recuperado.png" alt="Fase 8">
-      <div><span class="num">Fase 8</span><h3>NAS con RAID 5</h3><p>OpenMediaVault con tolerancia a fallos, resolviendo dos incidencias reales durante el proceso.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase8_raid-recuperado.png" alt="Fase 8"></div><div><span class="num">Fase 8</span><h3>NAS con RAID 5</h3><p>OpenMediaVault con tolerancia a fallos, resolviendo dos incidencias reales durante el proceso.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase9_grafana-logs-centralizados.png" alt="Fase 9">
-      <div><span class="num">Fase 9</span><h3>Logs centralizados y Grafana</h3><p>rsyslog + Loki + Promtail, con consulta visual mediante LogQL.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase9_grafana-logs-centralizados.png" alt="Fase 9"></div><div><span class="num">Fase 9</span><h3>Logs centralizados y Grafana</h3><p>rsyslog + Loki + Promtail, con consulta visual mediante LogQL.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase10_grafana-metricas.png" alt="Fase 10">
-      <div><span class="num">Fase 10</span><h3>Docker, Portainer y monitorización</h3><p>Prometheus, node-exporter, cAdvisor y windows_exporter visualizados en Grafana.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase10_grafana-metricas.png" alt="Fase 10"></div><div><span class="num">Fase 10</span><h3>Docker, Portainer y monitorización</h3><p>Prometheus, node-exporter, cAdvisor y windows_exporter visualizados en Grafana.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase11_restauracion-verificada.png" alt="Fase 11">
-      <div><span class="num">Fase 11</span><h3>Backups y restauración</h3><p>rsync y robocopy con prueba de restauración real, más diagnóstico de una limitación de wbadmin.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase11_restauracion-verificada.png" alt="Fase 11"></div><div><span class="num">Fase 11</span><h3>Backups y restauración</h3><p>rsync y robocopy con prueba de restauración real, más diagnóstico de una limitación de wbadmin.</p><span class="flag flag-ok">Completado</span></div></div>
 
-    <div class="phase">
-      <img src="Fase12_powershell-ejecutado.png" alt="Fase 12">
-      <div><span class="num">Fase 12</span><h3>Automatización con scripts</h3><p>Scripts en PowerShell y Bash, con detección de errores probada deliberadamente.</p><span class="flag flag-ok">Completado</span></div>
-    </div>
+    <div class="phase"><div class="imgwrap"><img src="Fase12_powershell-ejecutado.png" alt="Fase 12"></div><div><span class="num">Fase 12</span><h3>Automatización con scripts</h3><p>Scripts en PowerShell y Bash, con detección de errores probada deliberadamente.</p><span class="flag flag-ok">Completado</span></div></div>
 
   </div>
 </section>
 
 <section id="stack">
-  <div class="wrap">
+  <div class="wrap reveal">
     <h2>Stack técnico</h2>
     <p class="sec-sub">Tecnologías utilizadas a lo largo de todo el proyecto.</p>
     <div class="stack-grid">
@@ -210,6 +199,157 @@
     <a href="https://github.com/vblancofr90-tech/laboratorio-infraestructura-red">Repositorio del proyecto en GitHub</a>
   </div>
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var canvas = document.getElementById('hero-canvas');
+  var hero = canvas.parentElement;
+  var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+  function size(){
+    renderer.setSize(hero.clientWidth, hero.clientHeight, false);
+  }
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(50, hero.clientWidth/hero.clientHeight, 0.1, 100);
+  camera.position.set(0, 0.8, 9);
+
+  var group = new THREE.Group();
+  scene.add(group);
+
+  var nodeColor = 0x4fd1ff;
+  var nodes = [
+    {pos:[0,0,0], size:0.42, label:'core'},
+    {pos:[-3.4, 1.4, -1], size:0.26},
+    {pos:[-3.0, -1.6, 1.2], size:0.26},
+    {pos:[3.4, 1.5, 0.6], size:0.26},
+    {pos:[3.0, -1.3, -1.1], size:0.26},
+    {pos:[0.3, 2.6, -1.8], size:0.22},
+    {pos:[-0.6, -2.7, 1.6], size:0.22},
+    {pos:[1.8, -2.2, -1.8], size:0.22}
+  ];
+
+  var sphereGeo = new THREE.SphereGeometry(1, 20, 20);
+  var meshes = [];
+  nodes.forEach(function(n, i){
+    var mat = new THREE.MeshBasicMaterial({color: i===0 ? 0xffffff : nodeColor, transparent:true, opacity: i===0 ? 0.95 : 0.85});
+    var m = new THREE.Mesh(sphereGeo, mat);
+    m.position.set(n.pos[0], n.pos[1], n.pos[2]);
+    m.scale.setScalar(n.size);
+    group.add(m);
+    meshes.push(m);
+
+    var glowGeo = new THREE.SphereGeometry(1, 16, 16);
+    var glowMat = new THREE.MeshBasicMaterial({color: nodeColor, transparent:true, opacity:0.08});
+    var glow = new THREE.Mesh(glowGeo, glowMat);
+    glow.scale.setScalar(n.size*2.8);
+    glow.position.copy(m.position);
+    group.add(glow);
+  });
+
+  var lineMat = new THREE.LineBasicMaterial({color:nodeColor, transparent:true, opacity:0.28});
+  for(var i=1;i<nodes.length;i++){
+    var pts = [new THREE.Vector3(0,0,0), new THREE.Vector3(nodes[i].pos[0], nodes[i].pos[1], nodes[i].pos[2])];
+    var geo = new THREE.BufferGeometry().setFromPoints(pts);
+    var line = new THREE.Line(geo, lineMat);
+    group.add(line);
+  }
+
+  var pulseGeo = new THREE.SphereGeometry(1, 10, 10);
+  var pulses = [];
+  for(var p=1;p<nodes.length;p++){
+    var pm = new THREE.Mesh(pulseGeo, new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.9}));
+    pm.scale.setScalar(0.07);
+    pm.userData = {target:p, progress: Math.random(), speed: 0.004 + Math.random()*0.004};
+    group.add(pm);
+    pulses.push(pm);
+  }
+
+  var starGeo = new THREE.BufferGeometry();
+  var starCount = 300;
+  var positions = new Float32Array(starCount*3);
+  for(var s=0; s<starCount; s++){
+    positions[s*3] = (Math.random()-0.5)*40;
+    positions[s*3+1] = (Math.random()-0.5)*40;
+    positions[s*3+2] = (Math.random()-0.5)*40 - 10;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  var starMat = new THREE.PointsMaterial({color:0x2a90b8, size:0.04, transparent:true, opacity:0.5});
+  var stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  size();
+  window.addEventListener('resize', size);
+
+  var mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', function(e){
+    mouseX = (e.clientX / window.innerWidth - 0.5);
+    mouseY = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  var center = new THREE.Vector3(0,0,0);
+  var t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.0035;
+    group.rotation.y = t;
+    group.rotation.x = Math.sin(t*0.6)*0.15;
+    stars.rotation.y = t*0.15;
+
+    pulses.forEach(function(pm){
+      pm.userData.progress += pm.userData.speed;
+      if(pm.userData.progress > 1){ pm.userData.progress = 0; }
+      var target = nodes[pm.userData.target].pos;
+      pm.position.lerpVectors(center, new THREE.Vector3(target[0],target[1],target[2]), pm.userData.progress);
+    });
+
+    camera.position.x += (mouseX*1.6 - camera.position.x) * 0.04;
+    camera.position.y += (0.8 - mouseY*1.2 - camera.position.y) * 0.04;
+    camera.lookAt(0,0,0);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+var statEls = document.querySelectorAll('.stat .num');
+var statsObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var el = entry.target;
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var cur = 0;
+      var step = Math.max(1, Math.round(target/40));
+      var iv = setInterval(function(){
+        cur += step;
+        if(cur >= target){ cur = target; clearInterval(iv); }
+        el.textContent = cur + (target===70 ? '+' : '');
+      }, 25);
+      statsObs.unobserve(el);
+    }
+  });
+}, {threshold:0.5});
+statEls.forEach(function(el){ statsObs.observe(el); });
+
+document.querySelectorAll('.phase').forEach(function(card){
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    var px = (e.clientX - r.left)/r.width - 0.5;
+    var py = (e.clientY - r.top)/r.height - 0.5;
+    card.style.transform = 'perspective(800px) rotateY(' + (px*6) + 'deg) rotateX(' + (-py*6) + 'deg) translateY(-4px)';
+  });
+  card.addEventListener('mouseleave', function(){
+    card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0px)';
+  });
+});
+
+var reveals = document.querySelectorAll('.reveal');
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('show'); }
+  });
+}, {threshold:0.1});
+reveals.forEach(function(el){ obs.observe(el); });
+</script>
 
 </body>
 </html>
